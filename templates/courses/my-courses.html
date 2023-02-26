@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+
+    {% if my_courses %}
+
+        <center><h1 style="color: #b4b6ee">My Courses</h1></center>
+
+        {% for course in my_courses %}
+
+            {% include 'partials/course-card.html' %}
+
+        {% endfor %}
+
+    {% else %}
+
+        <p class="no-articles">You don't have any courses yet</p>
+
+    {% endif %}
+
+
+    {% if my_courses.has_previous %}
+
+        <a href="?page=1">&laquo; First</a>
+        <a href="?page={{ my_courses.previous_page_number }}">Previous</a>
+
+    {% endif %}
+
+        Page {{ my_courses.number }} of {{ my_courses.paginator.num_pages }}
+
+    {% if my_courses.has_next %}
+
+        <a href="?page= {{ my_courses.next_page_number }}">Next</a>
+        <a href="?page={{ my_courses.paginator.num_pages }}">Last &raquo;</a>
+
+    {% endif %}
+
+{% endblock %}
